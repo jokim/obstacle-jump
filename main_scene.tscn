@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://cijwep4i27law"]
+
+[ext_resource type="Script" uid="uid://f4ckspk1m702" path="res://main.gd" id="1_0f027"]
+[ext_resource type="Texture2D" uid="uid://b1pmoqw2citpy" path="res://assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Blue Nebula/Blue_Nebula_01-1024x1024.png" id="2_d5x1h"]
+[ext_resource type="PackedScene" uid="uid://dro0gjggvl87r" path="res://player.tscn" id="2_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://blq7d8m7mo5h1" path="res://ground.tscn" id="3_gyfs4"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0f027")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1024, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(272, 293)
+texture = ExtResource("2_d5x1h")
+
+[node name="Player" parent="." instance=ExtResource("2_gyfs4")]
+position = Vector2(126, 450)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Ground" parent="." instance=ExtResource("3_gyfs4")]
+position = Vector2(-40, 559)
+
+[node name="ObstacleSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(1120, 558)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Score" type="Label" parent="."]
+offset_left = 1080.0
+offset_top = 15.0
+offset_right = 1120.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -20.0
+offset_right = 41.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="MaxScore" type="Label" parent="Menu/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Rekord: 0 poeng"
+
+[node name="StartGame" type="Button" parent="Menu/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="pressed" from="Menu/Panel/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]

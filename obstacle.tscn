@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ue3iqxd4ttv"]
+
+[ext_resource type="Script" uid="uid://24bg1uk5xi23" path="res://obstacle.gd" id="1_sl1jc"]
+
+[node name="Obstacle" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_sl1jc")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(3.49811, 3.49811)
+color = Color(0.680458, 0.143563, 0.350466, 1)
+polygon = PackedVector2Array(0, 0, 5, -10, 10, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(3.49314, 3.49314)
+polygon = PackedVector2Array(0, 0, 5, -10, 10, 0)
