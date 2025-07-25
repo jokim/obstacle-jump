@@ -3,7 +3,7 @@
 A simple game, looking like Geometry Dash. Main purpose is to get familiar with
 Godot, so don't expect much.
 
-![screenshot.png]
+![Screenshot](screenshot.png)
 
 ## References
 
